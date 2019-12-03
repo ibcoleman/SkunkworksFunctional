@@ -11,7 +11,9 @@ import com.memetoclasm.skunkworksfunctional.algebras.data.network.mapper.toNetwo
 import retrofit2.Response
 import com.memetoclasm.skunkworksfunctional.runtime.context.Runtime
 
-
+/**
+ *
+ */
 fun <F> Runtime<F>.loadNews(): Kind<F, List<NewsItem>> = fx.concurrent {
     val response = !effect(context.bgDispatcher) { fetchNews() }
     continueOn(context.mainDispatcher)
@@ -23,6 +25,9 @@ fun <F> Runtime<F>.loadNews(): Kind<F, List<NewsItem>> = fx.concurrent {
     }
 }.handleErrorWith { error -> raiseError(error.normalizeError()) }
 
+/**
+ *
+ */
 fun <F> Runtime<F>.loadNewsItemDetails(title: String): Kind<F, NewsItem> = fx.concurrent {
     val response = !effect(context.bgDispatcher) { fetchNews() }
     continueOn(context.mainDispatcher)
@@ -37,6 +42,9 @@ fun <F> Runtime<F>.loadNewsItemDetails(title: String): Kind<F, NewsItem> = fx.co
     }
 }.handleErrorWith { error -> raiseError(error.normalizeError()) }
 
+/**
+ *
+ */
 private fun <F> Runtime<F>.fetchNews() = context.newsService.fetchNews("android").execute()
 
 private fun Response<NewsResponse>.news() = body()!!.articles

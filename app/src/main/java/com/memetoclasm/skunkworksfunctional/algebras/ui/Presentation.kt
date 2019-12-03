@@ -1,5 +1,7 @@
 package com.memetoclasm.skunkworksfunctional.algebras.ui
 
+import android.content.Context
+import androidx.navigation.NavController
 import arrow.Kind
 import com.memetoclasm.skunkworksfunctional.algebras.business.getNews
 import com.memetoclasm.skunkworksfunctional.algebras.business.model.DomainError
@@ -45,6 +47,15 @@ private fun displayErrors(
     }
 }
 
+/**
+ *
+ */
+fun <F> Runtime<F>.onNewsItemClick(ctx: Context, navController: NavController, title: String): Kind<F, Unit> =
+    goToNewsItemDetail(ctx, navController, title)
+
+/**
+ *
+ */
 fun <F> Runtime<F>.getAllNews(view: NewsListView): Kind<F, Unit> = fx.concurrent {
     !effect { view.showLoading() }
     val maybeNews = !getNews().attempt()

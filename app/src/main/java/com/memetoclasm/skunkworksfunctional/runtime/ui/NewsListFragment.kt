@@ -1,12 +1,10 @@
 package com.memetoclasm.skunkworksfunctional.runtime.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import arrow.fx.IO
@@ -18,6 +16,7 @@ import com.memetoclasm.skunkworksfunctional.algebras.ui.NewsListView
 import com.memetoclasm.skunkworksfunctional.algebras.ui.adapter.NewsRecyclerAdapter
 import com.memetoclasm.skunkworksfunctional.algebras.ui.getAllNews
 import com.memetoclasm.skunkworksfunctional.algebras.ui.model.NewsItemViewState
+import com.memetoclasm.skunkworksfunctional.algebras.ui.onNewsItemClick
 import com.memetoclasm.skunkworksfunctional.runtime.application
 import com.memetoclasm.skunkworksfunctional.runtime.context.runtime
 import kotlinx.android.synthetic.main.fragment_news_list.*
@@ -30,43 +29,34 @@ class NewsListFragment : Fragment(), NewsListView {
     private lateinit var adapter: NewsRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.fragment_news_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupList()
+    }
 
-
+    private fun setupList() {
         newsList.setHasFixedSize(true)
         newsList.layoutManager = LinearLayoutManager(context)
-        adapter = NewsRecyclerAdapter(itemClick = newsItemClickHandler)
+        adapter = NewsRecyclerAdapter(itemClick = onNewsItemClick())
         newsList.adapter = adapter
-
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            val action =
-                NewsListFragmentDirections.actionFirstFragmentToSecondFragment(
-                    //ToDo: Add news detail id here
-                    "From NewsListFragment"
-                )
-            findNavController().navigate(action)
-        }
     }
 
-    private val newsItemClickHandler : (NewsItemViewState) -> Unit = {
-        val action = NewsListFragmentDirections.actionFirstFragmentToSecondFragment(
-            it.title
-            )
-        findNavController().navigate(action)
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    private fun onNewsItemClick() = { newsItemViewState : NewsItemViewState ->
+        context?.let { ctx ->
+            unsafe {
+                runNonBlocking({
+                    IO.runtime(ctx.application().runtimeContext).onNewsItemClick(ctx, findNavController(), newsItemViewState.title)
+                }, {})
+            }
+        } ?: Unit
     }
 
     override fun onResume() {
         super.onResume()
-
         context?.let { ctx ->
             unsafe {
                 runNonBlocking({
