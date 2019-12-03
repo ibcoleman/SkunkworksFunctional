@@ -2,11 +2,14 @@
     <string name="app_name">SkunkworksFunctional</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label">News List</string>
+    <string name="second_fragment_label">News Detail</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="stub_description">This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. </string>
+    <string name="empty_description">No description available for this newsItem. Sorry!</string>
+    <string name="description_placeholder">Some random description would go here. It should be brief given it\'s just a preview and you\'re expected to click on it to read the article in depth.</string>
+    <string name="title_placeholder">Some title placeholder</string>
 </resources>
