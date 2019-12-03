@@ -12,11 +12,13 @@ sealed class DomainError {
             when (e) {
                 is NetworkError.Unauthorized -> AuthenticationError
                 is NetworkError.NotFound -> NotFoundError
+                is NetworkError.ServerError -> ServerError
                 else -> UnknownServerError((Some(e)))
             }
     }
 
     object AuthenticationError : DomainError()
     object NotFoundError : DomainError()
+    object ServerError : DomainError()
     data class UnknownServerError(val e: Option<Throwable> = None) : DomainError()
 }

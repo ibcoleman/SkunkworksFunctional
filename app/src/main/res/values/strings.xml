@@ -7,6 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="stub_description">This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. This is a stub description, just a long text to fit on screen. </string>
     <string name="empty_description">No description available for this newsItem. Sorry!</string>

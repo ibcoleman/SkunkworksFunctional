@@ -19,6 +19,8 @@ interface NewsView {
     fun showGenericError(): Unit
 
     fun showAuthenticationError(): Unit
+
+    fun showServerError(): Unit
 }
 
 interface NewsListView : NewsView {
@@ -39,6 +41,7 @@ private fun displayErrors(
         is DomainError.NotFoundError -> view.showNotFoundError()
         is DomainError.UnknownServerError -> view.showGenericError()
         is DomainError.AuthenticationError -> view.showAuthenticationError()
+        is DomainError.ServerError -> view.showServerError()
     }
 }
 
