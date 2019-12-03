@@ -9,7 +9,7 @@ import com.memetoclasm.skunkworksfunctional.runtime.ui.NewsListFragmentDirection
 /**
  *
  */
-fun <F> Runtime<F>.goToNewsItemDetail(ctx: Context, navController: NavController,  title: String): Kind<F, Unit> = fx.concurrent {
+fun <F> Runtime<F>.goToNewsItemDetail(navController: NavController,  title: String): Kind<F, Unit> = fx.concurrent {
     !effect {
         navController.navigate(
             NewsListFragmentDirections.actionFirstFragmentToSecondFragment(title)

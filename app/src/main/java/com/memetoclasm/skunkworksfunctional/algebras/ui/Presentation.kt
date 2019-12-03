@@ -50,8 +50,8 @@ private fun displayErrors(
 /**
  *
  */
-fun <F> Runtime<F>.onNewsItemClick(ctx: Context, navController: NavController, title: String): Kind<F, Unit> =
-    goToNewsItemDetail(ctx, navController, title)
+fun <F> Runtime<F>.onNewsItemClick(navController: NavController, title: String): Kind<F, Unit> =
+    goToNewsItemDetail(navController, title)
 
 /**
  *
