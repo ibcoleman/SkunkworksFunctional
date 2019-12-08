@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'androidx.navigation.safeargs'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -57,11 +59,16 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.squareup.picasso:picasso:$picasso_version"
 
+    implementation 'com.squareup.moshi:moshi:1.9.2'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.2'
 
-
-
-
+    testImplementation "me.jorgecastillo:hiroaki-core:$hiroaki_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mock_webserver_version"
     testImplementation 'junit:junit:4.12'
+    testImplementation "io.arrow-kt:arrow-core:$arrow_version"
+    testImplementation "io.arrow-kt:arrow-fx:$arrow_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

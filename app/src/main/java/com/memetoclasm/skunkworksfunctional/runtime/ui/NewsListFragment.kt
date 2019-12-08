@@ -49,7 +49,8 @@ class NewsListFragment : Fragment(), NewsListView {
         context?.let { ctx ->
             unsafe {
                 runNonBlocking({
-                    IO.runtime(ctx.application().runtimeContext).onNewsItemClick(ctx, findNavController(), newsItemViewState.title)
+                    IO.runtime(ctx.application().runtimeContext)
+                        .onNewsItemClick(findNavController(), newsItemViewState.title)
                 }, {})
             }
         } ?: Unit
